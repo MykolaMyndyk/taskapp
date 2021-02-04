@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskApp</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <hr>
+    <h2>Save Task Template</h2>
+    <hr>
+
+    <form action="#" th:action="@{/saveTaskTemplate}" th:object="${taskTemplate}" method="POST">
+        <input type="text" th:field="*{title}" placeholder="Title" class="form-control mb-4 col-4">
+
+        <select th:field="*{type}" class="form-control mb-4 col-4">
+            <option th:each="t : ${T(com.mmr.taskapp.model.TaskType).values()}"
+                    th:value="${t}" th:text="${t}"></option>
+        </select>
+
+        <select th:field="*{repeatInterval}" class="form-control mb-4 col-4">
+            <option th:each="i : ${T(com.mmr.taskapp.model.TaskRepeatInterval).values()}"
+                    th:value="${i}" th:text="${i}"></option>
+        </select>
+
+        <input type="date" th:field="*{scheduleDate}" placeholder="Schedule Date" class="form-control mb-4 col-4">
+
+        <input type="number" th:field="*{daysToNotify}" placeholder="Days To Notify" class="form-control mb-4 col-4">
+
+        <button type="submit" class="btn btn-info col-2"> Save Task Template</button>
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskApp</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-2">
+
+    <a th:href="@{/showAddTaskTemplateForm}" class="btn btn-primary btn-sm mb-3"> Add Task Template </a>
+
+    <h1>Task templates</h1>
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>RepeatInterval</th>
+            <th>Schedule Date</th>
+            <th>Days To Notify</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="taskTemplate : ${taskTemplates}">
+            <td th:text="${taskTemplate.title}"></td>
+            <td th:text="${taskTemplate.type}"></td>
+            <td th:text="${taskTemplate.repeatInterval}"></td>
+            <td th:text="${taskTemplate.scheduleDate}"></td>
+            <td th:text="${taskTemplate.daysToNotify}"></td>
+            <td>
+                <a th:href="@{/showUpdateTaskTemplateForm/{id}(id=${taskTemplate.id})}" class="btn btn-primary">Update</a>
+
+                <a th:href="@{/deleteTaskTemplateById/{id}(id=${taskTemplate.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+
+
+    </table>
+
+</div>
+
+</body>
+</html>
