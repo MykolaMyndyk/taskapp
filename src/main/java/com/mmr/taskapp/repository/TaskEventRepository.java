@@ -1,8 +1,9 @@
-package com.mmr.taskapp.service;
+package com.mmr.taskapp.repository;
 
+import com.mmr.taskapp.model.bo.TaskEventBO;
 import com.mmr.taskapp.model.bo.TaskTemplateBO;
-
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /*
  * Copyright (c) 2021 CompuGROUP Software GmbH
@@ -11,16 +12,8 @@ import java.util.List;
  * information and shall use it only in accordance with the terms of
  * the license agreement you entered into with CompuGROUP Software GmbH.
  */
-public interface TaskTemplateService {
 
-    List<TaskTemplateBO> findAll();
-
-    TaskTemplateBO save(TaskTemplateBO taskTemplate);
-
-    TaskTemplateBO update(TaskTemplateBO taskTemplate);
-
-    TaskTemplateBO findById(long id);
-
-    void deleteById(long id);
+@Repository
+public interface TaskEventRepository extends JpaRepository<TaskEventBO, Long> {
 
 }

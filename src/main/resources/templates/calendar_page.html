@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskApp</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/theme3.css}">
+    <script type="text/javascript" th:src="@{/caleandar.js}"></script>
+
+</head>
+<body>
+<div id="caleandar" align="center">
+
+    <script th:inline="javascript">
+        var list = /*[[${taskEvents}]]*/ [];
+        var events = [];
+        var settings = {};
+
+        for (var i = 0; i < list.length; i++) {
+            var event = list[i];
+            var eventDate = new Date(event["localDateTime"]);
+
+            events.push({
+                    'Date': new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate()),
+                    'Title': event["title"]
+                }
+            )
+        }
+
+        var element = document.getElementById('caleandar');
+
+        console.log(events);
+        console.log(events.length);
+
+        caleandar(element, events, settings);
+    </script>
+</div>
+
+<a th:href="@{/}" class="btn btn-primary btn-sm mb-3"> Back to Task Templates List</a>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.mmr.taskapp.service;
 
+import com.mmr.taskapp.model.bo.TaskEventBO;
 import com.mmr.taskapp.model.bo.TaskTemplateBO;
 
 import java.util.List;
@@ -11,16 +12,7 @@ import java.util.List;
  * information and shall use it only in accordance with the terms of
  * the license agreement you entered into with CompuGROUP Software GmbH.
  */
-public interface TaskTemplateService {
+public interface TaskEventGenerator {
 
-    List<TaskTemplateBO> findAll();
-
-    TaskTemplateBO save(TaskTemplateBO taskTemplate);
-
-    TaskTemplateBO update(TaskTemplateBO taskTemplate);
-
-    TaskTemplateBO findById(long id);
-
-    void deleteById(long id);
-
+    List<TaskEventBO> generateTaskEvents(TaskTemplateBO taskTemplateBO);
 }

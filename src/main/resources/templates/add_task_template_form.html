@@ -28,7 +28,8 @@
                     th:value="${i}" th:text="${i}"></option>
         </select>
 
-        <input type="date" th:field="*{scheduleDate}" placeholder="Schedule Date" class="form-control mb-4 col-4">
+        <input type="datetime-local" th:field="*{scheduleDate}" placeholder="Schedule Date"
+               class="form-control mb-4 col-4">
 
         <input type="number" th:field="*{daysToNotify}" placeholder="Days To Notify" class="form-control mb-4 col-4">
 
@@ -36,6 +37,10 @@
     </form>
 
 </div>
+
+<hr>
+
+<a th:href="@{/}" class="btn btn-primary btn-sm mb-3"> Back to Task Templates List</a>
 
 </body>
 </html>

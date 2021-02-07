@@ -1,11 +1,13 @@
 package com.mmr.taskapp.service;
 
 import com.mmr.taskapp.model.bo.TaskTemplateBO;
+import com.mmr.taskapp.repository.TaskEventRepository;
 import com.mmr.taskapp.repository.TaskTemplateRepository;
 import com.mmr.taskapp.telegram.TelegramNotifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,6 +19,12 @@ public class TaskTemplateServiceImpl implements TaskTemplateService {
     private TaskTemplateRepository taskTemplateRepository;
 
     @Autowired
+    private TaskEventRepository taskEventRepository;
+
+    @Autowired
+    private TaskEventGenerator taskEventGenerator;
+
+    @Autowired
     private TelegramNotifier telegramNotifier;
 
     @Override
@@ -26,7 +34,21 @@ public class TaskTemplateServiceImpl implements TaskTemplateService {
 
     @Override
     public TaskTemplateBO save(TaskTemplateBO taskTemplate) {
-        return taskTemplateRepository.save(taskTemplate);
+        taskTemplate = taskTemplateRepository.saveAndFlush(taskTemplate);
+
+        taskEventGenerator.generateTaskEvents(taskTemplate);
+
+        return taskTemplate;
+    }
+
+    @Override
+    public TaskTemplateBO update(TaskTemplateBO taskTemplate) {
+        taskTemplate.setTaskEvents(Collections.emptyList());
+        taskTemplate = taskTemplateRepository.saveAndFlush(taskTemplate);
+
+        taskEventGenerator.generateTaskEvents(taskTemplate);
+
+        return taskTemplate;
     }
 
     @Override

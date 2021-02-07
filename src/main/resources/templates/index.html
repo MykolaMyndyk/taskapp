@@ -13,6 +13,7 @@
 <div class="container my-2">
 
     <a th:href="@{/showAddTaskTemplateForm}" class="btn btn-primary btn-sm mb-3"> Add Task Template </a>
+    <a th:href="@{/showCalendarPage}" class="btn btn-primary btn-sm mb-3"> Show Calendar Page </a>
 
     <h1>Task templates</h1>
     <table border="1" class="table table-striped table-responsive-md">
@@ -23,6 +24,7 @@
             <th>RepeatInterval</th>
             <th>Schedule Date</th>
             <th>Days To Notify</th>
+            <th>count of events</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -33,9 +35,9 @@
             <td th:text="${taskTemplate.repeatInterval}"></td>
             <td th:text="${taskTemplate.scheduleDate}"></td>
             <td th:text="${taskTemplate.daysToNotify}"></td>
-            <td>
-                <a th:href="@{/showUpdateTaskTemplateForm/{id}(id=${taskTemplate.id})}" class="btn btn-primary">Update</a>
+            <td th:text="${taskTemplate.taskEvents.size()}"></td>
 
+            <td>
                 <a th:href="@{/deleteTaskTemplateById/{id}(id=${taskTemplate.id})}" class="btn btn-danger">Delete</a>
             </td>
         </tr>
